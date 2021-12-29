@@ -20,7 +20,8 @@ module.exports = (io, socket) => {
     }
 
     const getAllNeareUsers = async (payload) => {
-        console.log('mtav', socket.decoded.location.coordinates)
+        console.log(new Date(new Date().getTime() - 1000 * 60 * 5), 'mtav', socket.decoded.location.coordinates)
+
         User.find({
             $and: [
                 { _id: { $ne: socket.decoded._id } },
@@ -35,6 +36,11 @@ module.exports = (io, socket) => {
                         }
                     }
                 },
+                {
+                    updatedAt: { // 18 minutes ago (from now)
+                        $gt: new Date(new Date().getTime() - 1000 * 60 * 1)
+                    }
+                }
             ]
         }).then((user) => {
             console.log(user)
