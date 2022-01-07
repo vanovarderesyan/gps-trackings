@@ -38,7 +38,7 @@ module.exports = (io, socket) => {
                 },
                 {
                     updatedAt: { // 18 minutes ago (from now)
-                        $gt: new Date(new Date().getTime() - 1000 * 60 * 1)
+                        $gt: new Date(new Date().getTime() - 1000 * 60 * 0.1)
                     }
                 }
             ]

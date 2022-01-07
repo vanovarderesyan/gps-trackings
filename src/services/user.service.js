@@ -37,7 +37,6 @@ const queryUsers = async (filter, options) => {
 const getUserById = async (id) => {
   return User.findById(id);
 };
-
 /**
  * Get user by email
  * @param {string} email
@@ -66,6 +65,17 @@ const updateUserById = async (userId, updateBody) => {
   return user;
 };
 
+const updateUserByEmail = async (email, updateBody) => {
+  const user = await getUserByEmail(email);
+  if (!user) {
+    return false
+  }
+
+  Object.assign(user, updateBody);
+  await user.save();
+  return user;
+};
+
 /**
  * Delete user by id
  * @param {ObjectId} userId
@@ -83,6 +93,7 @@ const deleteUserById = async (userId) => {
 module.exports = {
   createUser,
   queryUsers,
+  updateUserByEmail,
   getUserById,
   getUserByEmail,
   updateUserById,
