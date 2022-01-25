@@ -43,8 +43,12 @@ module.exports = (io, socket) => {
                 }
             ]
         }).then((user) => {
-            console.log(user)
-            socket.emit('user:read', user)
+            if(user.length > 0){
+                console.log(user,'-----------------')
+
+                socket.emit('user:read', user)
+
+            }
         })
         // ...
     }
